@@ -1,22 +1,25 @@
+package screen;
+
 /**
- * TerminalScreen class represents a screen in memory that can be manipulated with various commands.
- * The screen is modeled as a 2d array of characters, and the class provided methods to setup , 
+ * screen.TerminalScreen class represents a screen in memory that can be manipulated with various commands.
+ * The screen is modeled as a 2d array of characters, and the class provided methods to setup,
  * clear, and draw characters and text, among other operations. 
  * The screen also supports cursor movement and line drawing.
  */
 
 public class TerminalScreen {
-    // instance variables to hold the screen dimensions, color mode, and screen buffer
+    // Instance variables to hold the screen dimensions, color mode, and screen buffer
     private int width;
     private int height;
-    private int colorMode;
-    private char[][] screenBuffer; /// hold the terminal's current diplay
+    private int colorMode;  // The color mode (0: monochrome, 1: 16 colors, 2: 256 colors)
+    private char[][] screenBuffer; //hold the terminal's current display
+    private int[][] colorBuffer; // this buffer stores the color index for each character
     private int cursorX;
     private int cursorY;
-    private boolean isSetup; // fla to indicate whether the screen has been set up
+    private boolean isSetup; // flag to indicate whether the screen has been set up
 
      /**
-     * Constructor for initializing the TerminalScreen object with given dimensions and color mode.
+     * Constructor for initializing the screen.TerminalScreen object with given dimensions and color mode.
      * Initially, the screen is not set up until setupScreen() is called.
      *
      * @param width - The width of the screen (in characters).
@@ -29,6 +32,7 @@ public class TerminalScreen {
          this.height = height;
          this.colorMode = colorMode;
          this.screenBuffer = new char[height][width];
+         this.colorBuffer = new int[height][width];
          this.cursorX = 0; //top-left position
          this.cursorY = 0;
          this.isSetup = false; //flag to track if the screen has been setup
@@ -49,8 +53,10 @@ public class TerminalScreen {
          this.height = height;
          this.colorMode = colorMode;
          this.screenBuffer = new char[height][width];
+         this.colorBuffer = new int[height][width];
          this.cursorX = 0;
          this.cursorY = 0;
+         this.isSetup = true;
      }
 
      /**
@@ -71,9 +77,9 @@ public class TerminalScreen {
 
      public void clearScreen(){
          if (!isSetup){
-             throw new IllegalStateException("Screen not set up yet.pease set up the screen first.");
+             throw new IllegalStateException("Screen not set up yet.Please set up the screen first.");
          }
-         // fill the scren buffer with spaces
+         // fill the screen buffer with spaces
          for (int i = 0; i < height; i++){
              for (int j = 0; j < width; j++){
                  screenBuffer[i][j] = ' ';
@@ -92,7 +98,7 @@ public class TerminalScreen {
      * @throws IllegalStateException if the screen has not been set up yet.
      */
 
-     public void drawCharacter(int x, int y, char c,int colorIndex){
+     public void drawCharacter(int x, int y, char c, int colorIndex){
          if (!isSetup){
              throw new IllegalStateException("Screen not set up yet.Please set up the screen first.");
          }
@@ -129,7 +135,59 @@ public class TerminalScreen {
          }
      }
 
-     /**
+    /**
+     * Apply the color to the terminal based on the color index.
+     * This method simulates color application on the terminal.
+     *
+     * @param colorIndex - The color index to apply.
+     */
+    public void applyColor(int colorIndex){
+        switch (colorIndex){
+            case 1:
+                System.out.print("\033[31m");  //red color
+                break;
+            case 2:
+                System.out.print("\033[32m"); // Green color
+                break;
+            case 3:
+                System.out.print("\033[33m"); //Yellow color
+                break;
+            case 4:
+                System.out.print("\033[34m"); // Blue color
+                break;
+            case 5:
+                System.out.print("\033[35m"); // Magenta color
+                break;
+            case 6:
+                System.out.print("\033[36m"); // cyan color
+                break;
+            case 7:
+                System.out.print("\033[37m"); // white color
+                break;
+            case 8:
+                System.out.print("\033[90m"); // bright black(gray)
+                break;
+            case 9:
+                System.out.print("\033[91m"); // bright red
+                break;
+            case 10:
+                System.out.print("\033[92m"); // bright green
+                break;
+            default:
+                System.out.print("\033[0m"); // Reset to default color
+                break;
+        }
+    }
+
+    /**
+     * Reset the terminal color back to the default color.
+     */
+    private void resetColor() {
+        System.out.print("\033[0m"); // Reset color (ANSI escape code)
+    }
+
+
+    /**
      * Move the cursor to a specific coordinate (x, y) on the screen.
      * This action does not draw anything but simply moves the cursor position.
      *
@@ -158,7 +216,7 @@ public class TerminalScreen {
      * This function allows for drawing directly where the cursor is located.
      *
      * @param c - The character to draw.
-     * @param colorIndex - The color index (this can be used for future color implementation).
+     * @param colorIndex - The color index
      *
      * @throws IllegalStateException if the screen has not been set up yet.
      */
@@ -168,7 +226,7 @@ public class TerminalScreen {
              throw new IllegalStateException("Screen not set up yet.Please set up the screen first.");
          }
 
-         // draw the charater at the cursor's current postion
+         // draw the character at the cursor's current position
          drawCharacter(cursorX, cursorY, c, colorIndex);
      }
 
@@ -177,7 +235,7 @@ public class TerminalScreen {
      *
      * @param x - The starting x-coordinate (horizontal position).
      * @param y - The starting y-coordinate (vertical position).
-     * @param colorIndex - The color index (this can be used for future color implementation).
+     * @param colorIndex - The color index
      * @param text - The text string to render on the screen.
      *
      * @throws IllegalStateException if the screen has not been set up yet.
@@ -189,9 +247,18 @@ public class TerminalScreen {
          }
 
          //render each character in the string starting from the given position
+         if (y < 0 || y >= height){
+             System.out.println("Invalid starting y-coordinate for rendering text.");
+             return;
+         }
+
+         // check if the x-coordinate is within the valid range
+         if(x < 0 || x >= width){
+             System.out.println("Invalid starting x-coordinate for rendering text.");
+             return;
+         }
          for (int i = 0; i < text.length(); i++){
-             // prevent text overflow beyond the screen width
-             if (x + i < width) {
+             if (x + i < width){
                  drawCharacter(x + i, y, text.charAt(i), colorIndex);
              }
          }
@@ -206,7 +273,7 @@ public class TerminalScreen {
      * @param y1 - Starting y-coordinate.
      * @param x2 - Ending x-coordinate.
      * @param y2 - Ending y-coordinate.
-     * @param colorIndex - The color index (this can be used for future color implementation).
+     * @param colorIndex - The color index
      * @param character - The character to use for drawing the line.
      *
      * @throws IllegalStateException if the screen has not been set up yet.
@@ -228,7 +295,10 @@ public class TerminalScreen {
              drawCharacter(x1, y1, character, colorIndex);
              if (x1 == x2  && y1 == y2) break;
              int e2 = err * 2;
-             if (e2 > -dy) { err -= dy; x1 += sx; }
+             if (e2 > -dy) {
+                 err -= dy;
+                 x1 += sx;
+             }
              if (e2 < dx) {err += dx; y1 += sy;}
          }
      }
@@ -241,5 +311,35 @@ public class TerminalScreen {
      public void endOfFile() {
          System.out.println("End of file reached.Stopping command process.");
      }
+
+    /**
+     * Sets the color mode for the screen.
+     *
+     * @param colorMode - The color mode to set (0: monochrome, 1: 16 colors, 2: 256 colors).
+     *
+     * @throws IllegalStateException if the screen has not been set up yet.
+     */
+    public void setColorMode(int colorMode){
+        if (!isSetup){
+            throw new IllegalStateException("Screen not set up yet. Please set up the screen first.");
+        }
+
+        this.colorMode = colorMode;
+    }
+
+    /**
+     * Gets the current color mode of the screen.
+     *
+     * @return the current color mode (0: monochrome, 1: 16 colors, 2: 256 colors).
+     *
+     * @throws IllegalStateException if the screen has not been set up yet.
+     */
+    public int getColorMode(){
+        if (!isSetup){
+            throw new IllegalStateException("Screen not set up yet. Please set up the screen first.");
+        }
+        return colorMode;
+    }
+
 }
 
