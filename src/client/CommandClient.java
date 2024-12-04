@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 public class CommandClient {
-    public static void main(String[] args){
+    public void run(){
         try {
             // server information
             String serverAddress = "localhost";
@@ -52,7 +52,7 @@ public class CommandClient {
                 }
             }
 
-            // close the socket and scanner
+            // close the socket and scannerb
             socket.close();
             scanner.close();
             System.out.println("Goodbye.");
@@ -65,5 +65,10 @@ public class CommandClient {
     private static boolean isValidCommand(String command){
         String regex = "^0x[0-9A-Fa-f]+(:[0-9]+(?:,[0-9]+)*)$";
         return command.matches(regex);
+    }
+
+    public static void main(String[] args) {
+        CommandClient client = new CommandClient();
+        client.run();
     }
 }

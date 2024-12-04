@@ -5,19 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="934d59e5-8db1-4e0d-86aa-fd23cd53fd94" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Command.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/Command.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TerminalApp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TerminalScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/TerminalScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearScreenCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearScreenCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/CursorMovementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/CursorMovementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DrawCharacterCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawCharacterCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DrawLineCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawLineCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RenderTextCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RenderTextCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ScreenSetupCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ScreenSetupCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/CommandClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ScreenServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ScreenServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,21 +27,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/james/Terminal-Screen&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/james/Terminal-Screen",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -70,10 +63,22 @@
       <workItem from="1733215703170" duration="8732000" />
       <workItem from="1733245584323" duration="650000" />
       <workItem from="1733246323512" duration="12710000" />
+      <workItem from="1733298318755" duration="9097000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

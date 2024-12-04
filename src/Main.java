@@ -11,11 +11,11 @@ public class Main {
         if (args[0].equalsIgnoreCase("server")){
             // start the server
             ScreenServer server = new ScreenServer();
-            server.start();
+            server.run();
         } else if (args[0].equalsIgnoreCase("client")){
             // start the client
             CommandClient client = new CommandClient();
-            client.start();
+            client.run();
         }else {
             System.out.println("Unknown argument. Use 'server' or 'client' .");
         }

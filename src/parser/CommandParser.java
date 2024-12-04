@@ -44,6 +44,10 @@ public class CommandParser {
      * @throws IllegalArgumentException if the command byte is not recognized.
      */
     public void parseAndExecute(int commandByte, byte[] data, TerminalScreen screen) {
+        // check if the screen is set up before executing any commands
+        if (commandByte != 0x1 && !screen.isSetup()){
+            throw new IllegalArgumentException("Error: Screen is not setup");
+        }
         // Retrieve the command factory corresponding to the command byte
         Function<byte[], Command> commandFactory = commandMap.get(commandByte);
 
@@ -115,7 +119,7 @@ public class CommandParser {
         int colorIndex = data[data.length - 1]; // Color index is the last byte
 
         // Convert the remaining bytes (from index 2 to the second-last byte) into a string
-        String text = new String(data, 2, data.length - 3); // Conver
+        String text = new String(data, 2, data.length - 3);
         return new RenderTextCommand(x, y, text, colorIndex);
     }
 
