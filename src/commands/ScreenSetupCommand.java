@@ -1,9 +1,10 @@
 package commands;
 
+import iterface.Command;
 import screen.TerminalScreen;
 
 /**
- * The ScreenSetupCommand class implements the commands.Command interface and is responsible for setting up the screen
+ * The ScreenSetupCommand class implements the iterface.Command interface and is responsible for setting up the screen
  * by defining its dimensions and color mode. This command must be executed before any other commands
  * on the screen.TerminalScreen.
  */

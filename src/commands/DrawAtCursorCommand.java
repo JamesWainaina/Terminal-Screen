@@ -1,13 +1,14 @@
 package commands;
 
+import iterface.Command;
 import screen.TerminalScreen;
 
 /**
- * commands.Command to draw a character at the current cursor position on the terminal screen.
+ * iterface.Command to draw a character at the current cursor position on the terminal screen.
  * This command takes the character to draw and the color index as arguments.
  */
 
-public class DrawAtCursorCommand implements Command{
+public class DrawAtCursorCommand implements Command {
     private char character;
     private int colorIndex;
     
@@ -36,6 +37,11 @@ public class DrawAtCursorCommand implements Command{
         // check if the screen is set up before drawing
         if (!terminalScreen.isSetup()){
             throw new IllegalArgumentException("Screen is not set ip.Please set up the screen first.");
+        }
+
+        // Ensure that the data array has enough bytes (at least 2)
+        if (data.length < 2) {
+            throw new IllegalArgumentException("Data array must contain at least 2 bytes: character and color index.");
         }
 
         // the data array can be used to pass character and colorIndex

@@ -1,9 +1,10 @@
 package commands;
 
+import iterface.Command;
 import screen.TerminalScreen;
 
 /**
- * The RenderTextCommand class implements the commands.Command interface and is responsible for
+ * The RenderTextCommand class implements the iterface.Command interface and is responsible for
  * rendering a string of text at a given coordinate (x, y) on the terminal screen.
  */
 

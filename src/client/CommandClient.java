@@ -5,58 +5,50 @@ import java.util.Scanner;
 
 
 public class CommandClient {
+    private static final String SERVER_ADDRESS = "localhost";
+    private static final int PORT = 8000;
+    private static boolean isScreenSetup = false;
+
     public void run(){
-        try {
-            // server information
-            String serverAddress = "localhost";
-            int port = 8000;
+        try (
+                // Establish socket connection to the server
+                Socket socket = new Socket(SERVER_ADDRESS, PORT);
+                OutputStream output = socket.getOutputStream();
+                PrintWriter writer = new PrintWriter(output,true);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                Scanner scanner = new Scanner(System.in)
+                ) {
+            System.out.println("Connected to the server at " + SERVER_ADDRESS);
 
-            // Establish socket connection to the server
-            Socket socket  = new Socket(serverAddress, port);
-            System.out.println("Connected to the server." + serverAddress);
-
-            //Output stream for sending data
-            OutputStream output = socket.getOutputStream();
-            PrintWriter writer = new PrintWriter(output, true);
-
-            // input stream for receiving response from the server
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-            // Scanner for user input
-            Scanner scanner = new Scanner(System.in);
             boolean running = true;
 
-            // main loop for accepting commands
-            while(running){
-                // Print prompt and wait for user input
-                System.out.println("Enter command (e.g., '0x2:10,5,65,2' or 'exit' to quit):");
+            while (running) {
+                System.out.println("Enter command: (eg., '0x2:10,5,65,2' or 'exit', to quit):");
 
                 // Get User input
                 String input = scanner.nextLine();
 
-                // Exit the loop if the user types 'exit'
-                if (input.equalsIgnoreCase("exit")){
+                //Exit the lop if the user types 'exit'
+                if (input.equalsIgnoreCase("exit")) {
                     running = false;
-                } else {
+                } else{
                     // validate the command format
-                    if (isValidCommand(input)){
+                    if (isValidCommand(input)) {
                         writer.println(input);
 
                         // Read and print the server's response
                         String response = reader.readLine();
                         System.out.println("Server response: " + response);
-                    } else {
+                    } else  {
                         System.out.println("Invalid command format. Please follow the format '0x2:10,5,65,2'.");
                     }
-
                 }
             }
-
-            // close the socket and scannerb
+            // close the socket and scanner
             socket.close();
             scanner.close();
             System.out.println("Goodbye.");
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

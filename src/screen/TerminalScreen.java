@@ -106,6 +106,7 @@ public class TerminalScreen {
          // ensure coordinates are within bounds
          if (x >= 0 && x < width && y >= 0 && y < height){
              // place the character at the screen at the given position
+             applyColor(colorIndex);
              screenBuffer[y][x] = c;
          } else{
              System.out.println("Invalid coordinates: (" + x + "," +y + ")");
@@ -129,7 +130,9 @@ public class TerminalScreen {
          // print each row of the screen buffer
          for (int i = 0; i < height; i++){
              for (int j = 0; j < width; j++){
+                 applyColor(colorBuffer[i][j]);
                  System.out.print(screenBuffer[i][j]);
+                 resetColor();
              }
              System.out.println();
          }
@@ -340,6 +343,5 @@ public class TerminalScreen {
         }
         return colorMode;
     }
-
 }
 

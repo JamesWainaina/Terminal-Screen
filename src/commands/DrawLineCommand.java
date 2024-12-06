@@ -1,9 +1,10 @@
 package commands;
 
+import iterface.Command;
 import screen.TerminalScreen;
 
 /**
- * The DrawLineCommand class implements the commands.Command interface and is responsible for drawing a
+ * The DrawLineCommand class implements the iterface.Command interface and is responsible for drawing a
  * line from one coordinate to another using a specific character on the screen.TerminalScreen.
  */
 
@@ -46,7 +47,16 @@ public class DrawLineCommand implements Command {
 
     @Override
     public void execute(TerminalScreen screen, byte[] data) {
+        // Extract values from the data byte array
+        int x1 = Byte.toUnsignedInt(data[0]);
+        int y1 = Byte.toUnsignedInt(data[1]);
+        int x2 = Byte.toUnsignedInt(data[2]);
+        int y2 = Byte.toUnsignedInt(data[3]);
+        char character = (char) data[4];
+        int colorIndex = Byte.toUnsignedInt(data[5]);
+
         screen.drawLine(x1, y1, x2, y2, colorIndex, character);
+
         System.out.println("Line drawn from (" + x1 + ", " + y1 + ") to (" + x2 + ", " + y2 + ") with character '" + character + "' and color index " + colorIndex);
     }
 }

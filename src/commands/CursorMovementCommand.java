@@ -1,10 +1,11 @@
 package commands;
 
 
+import iterface.Command;
 import screen.TerminalScreen;
 
 /**
- * The CursorMovementCommand class implements the commands.Command interface and is responsible for
+ * The CursorMovementCommand class implements the iterface.Command interface and is responsible for
  * moving the cursor to a specified location on the terminal screen.
  */
 
@@ -35,6 +36,10 @@ public class CursorMovementCommand implements Command {
     public void execute(TerminalScreen screen, byte[] data) {
         // The 'data' array is expected to contain the coordinated of the cursor
         // Extract coordinates from the data byte array
+        // Validate that data contains the expected two bytes for coordinates
+        if (data.length < 2) {
+            throw new IllegalArgumentException("Invalid data: expected at least 2 bytes for x and y coordinates.");
+        }
 
         // extract coordinates from the data byte array
         int x = data[0];

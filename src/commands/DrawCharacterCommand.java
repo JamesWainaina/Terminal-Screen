@@ -1,9 +1,10 @@
 package commands;
 
+import iterface.Command;
 import screen.TerminalScreen;
 
 /**
- * The DrawCharacterCommand class implements the commands.Command interface and is responsible for drawing a
+ * The DrawCharacterCommand class implements the iterface.Command interface and is responsible for drawing a
  * specific character at a given (x, y) coordinate on the screen.TerminalScreen.
  */
 
@@ -46,10 +47,10 @@ public class DrawCharacterCommand implements Command {
         }
 
         // Extract the necessary values from the data array
-        int x = data[0];
-        int y = data[1];
+        int x = Byte.toUnsignedInt(data[0]);
+        int y = Byte.toUnsignedInt(data[1]);
         char character = (char) data[2];
-        int colorIndex = data[3];
+        int colorIndex = Byte.toUnsignedInt(data[3]);
 
         screen.drawCharacter(x, y, character, colorIndex);
 

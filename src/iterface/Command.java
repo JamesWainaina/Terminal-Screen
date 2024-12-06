@@ -1,9 +1,9 @@
-package commands;
+package iterface;
 
 import screen.TerminalScreen;
 
 /**
- * The commands.Command interface represents a generic command that can be executed
+ * The iterface.Command interface represents a generic command that can be executed
  * on a screen.TerminalScreen. All specific commands such as drawing characters,
  * rendering text, or clearing the screen will implement this interface.
  */

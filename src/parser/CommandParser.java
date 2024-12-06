@@ -1,7 +1,9 @@
 package parser;
 
 import commands.*;
+import iterface.Command;
 import screen.TerminalScreen;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -32,6 +34,8 @@ public class CommandParser {
         commandMap.put(0x4, this::createRenderTextCommand);
         commandMap.put(0x5, this::createCursorMovementCommand);
         commandMap.put(0x6, this::createDrawAtCursorCommand);
+        commandMap.put(0x7, this::createClearScreenCommand);
+        commandMap.put(0xFF, this::createEndOfFileCommand);
     }
 
     /**
@@ -44,6 +48,9 @@ public class CommandParser {
      * @throws IllegalArgumentException if the command byte is not recognized.
      */
     public void parseAndExecute(int commandByte, byte[] data, TerminalScreen screen) {
+        if (screen == null){
+            throw new IllegalArgumentException("TerminalScreen is not set up");
+        }
         // check if the screen is set up before executing any commands
         if (commandByte != 0x1 && !screen.isSetup()){
             throw new IllegalArgumentException("Error: Screen is not setup");
@@ -166,12 +173,29 @@ public class CommandParser {
      */
     private ScreenSetupCommand createScreenSetupCommand(byte[] data){
         if (data.length != 3){
-            throw new IllegalArgumentException("Data array must have exactly 3 elements for ScreenSetupCommand");
+            throw new IllegalArgumentException("Data array must have exactly 3 elements  for ScreenSetupCommand");
         }
+
         int width = data[0];
         int height = data[1];
         int colorMode = data[2];
 
         return new ScreenSetupCommand(width, height, colorMode);
+    }
+
+
+    private ClearScreenCommand createClearScreenCommand(byte[] data) {
+        if (data.length != 3){
+            throw new IllegalArgumentException("Data array should have exactly 3 elements for clearing the screen");
+        }
+
+        return  new ClearScreenCommand();
+    }
+
+    private EndOfFileCommand createEndOfFileCommand(byte[] data) {
+        if (data.length != 3) {
+            throw new IllegalArgumentException("Data array must have exactly 3 elements for EndOfFileCommand");
+        }
+        return  new EndOfFileCommand();
     }
 }

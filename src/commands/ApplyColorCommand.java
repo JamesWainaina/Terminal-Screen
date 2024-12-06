@@ -1,5 +1,6 @@
 package commands;
 
+import iterface.Command;
 import screen.TerminalScreen;
 
 public class ApplyColorCommand implements Command {

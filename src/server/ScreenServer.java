@@ -15,7 +15,6 @@ public class ScreenServer implements Runnable {
     private int port = 8000;
     private TerminalScreen screen;
     private CommandParser parser;
-    private boolean isScreenSetUp = false;  // Flag to check if the screen is set up
 
     /**
      * Constructor to initialize the ScreenServer.
@@ -78,23 +77,22 @@ public class ScreenServer implements Runnable {
                     data[i] = Byte.parseByte(dataParts[i]);
                 }
 
-                // Check for screen setup command (let's assume 0x1 is the setup command)
+                // check for screen setup command (0x1 is the setup command)
                 if (commandType == 0x1) {
-                    // Setup the screen using the provided width, height, and colorMode
+                    // initialize the screen with width, height and color
                     int width = data[0];
                     int height = data[1];
                     int colorMode = data[2];
-                    screen = new TerminalScreen(width, height, colorMode);  // Set up a new screen
-                    isScreenSetUp = true;
-                    System.out.println("Screen setup complete: " + width + "x" + height + ", Color mode: " + colorMode);
+                    screen = new TerminalScreen(width, height, colorMode);
+                    System.out.println("Screen setup complete: " + width + " x " + height + "x Color mode: " + colorMode);
                     writer.println("Screen setup complete.");
-                    continue;  // Skip further processing of the screen setup command
+                    continue;
                 }
 
-                // Ensure the screen is set up before any other command
-                if (!isScreenSetUp) {
-                    writer.println("Error: Screen not set up. Please set up the screen first.");
-                    System.out.println("Error: Screen not set up.");
+                // If the screen is not set up, respond with an error
+                if (screen == null) {
+                    writer.println("Error: Screen is not set up. Please set up screen first.");
+                    System.out.println("Error: Screen not set up");
                     continue;
                 }
 
@@ -107,7 +105,7 @@ public class ScreenServer implements Runnable {
                     writer.println("Command processed and screen updated.");
                     System.out.println("Command processed and screen updated.");
                 } catch (IllegalArgumentException e) {
-                    writer.println("Error: " + e.getMessage());
+                    writer.println("Error:" + e.getMessage());
                     System.out.println("Error: " + e.getMessage());
                 }
             }
