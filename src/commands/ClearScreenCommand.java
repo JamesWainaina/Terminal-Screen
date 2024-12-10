@@ -23,5 +23,6 @@ public class ClearScreenCommand implements Command {
     public void execute(TerminalScreen screen, byte[] data) {
         // Call the clearScreen method of TerminalScreen to reset the screen buffer
         screen.clearScreen();
+        System.out.println("Screen cleared");
     }
 }

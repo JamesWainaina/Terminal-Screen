@@ -11,7 +11,8 @@ public class Main {
         if (args[0].equalsIgnoreCase("server")){
             // start the server
             ScreenServer server = new ScreenServer();
-            server.run();
+            Thread serverThread = new Thread(server);
+            serverThread.start();
         } else if (args[0].equalsIgnoreCase("client")){
             // start the client
             CommandClient client = new CommandClient();

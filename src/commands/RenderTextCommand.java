@@ -39,6 +39,10 @@ public class RenderTextCommand implements Command {
 
     @Override
     public void execute(TerminalScreen screen, byte[] data) {
+        if (data.length < 3) {
+            throw new IllegalArgumentException("Insufficient data to render text. Expected coordinates and text.");
+        }
+
         screen.renderText(x, y, colorIndex, text);
         System.out.println("Text '" + text + "' rendered at position (" + x + ", " + y + ") with color index " + colorIndex + ".");
     }

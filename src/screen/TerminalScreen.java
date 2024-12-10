@@ -16,27 +16,50 @@ public class TerminalScreen {
     private int[][] colorBuffer; // this buffer stores the color index for each character
     private int cursorX;
     private int cursorY;
-    private boolean isSetup; // flag to indicate whether the screen has been set up
+    private boolean isSetup;
+    private static TerminalScreen instance;
 
      /**
      * Constructor for initializing the screen.TerminalScreen object with given dimensions and color mode.
      * Initially, the screen is not set up until setupScreen() is called.
      *
-     * @param width - The width of the screen (in characters).
+     * @param width - The width of createdthe screen (in characters).
      * @param height - The height of the screen (in characters).
      * @param colorMode - The color mode of the screen (0: monochrome, 1: 16 colors, 2: 256 colors).
      */
 
-     public TerminalScreen(int width, int height, int colorMode){
+     private TerminalScreen(int width, int height, int colorMode){
          this.width = width;
          this.height = height;
          this.colorMode = colorMode;
          this.screenBuffer = new char[height][width];
          this.colorBuffer = new int[height][width];
-         this.cursorX = 0; //top-left position
+         this.cursorX = 0; // top-left position
          this.cursorY = 0;
-         this.isSetup = false; //flag to track if the screen has been setup
+         this.isSetup = false;
      }
+
+     // ensures only one instance of the TerminalScreen class
+    // exist during the lifetime of the program.
+     public static TerminalScreen getInstance(int width, int height, int colorMode){
+         if (instance == null){
+             synchronized (TerminalScreen.class){
+                 if (instance == null){
+                     instance = new TerminalScreen(width, height, colorMode);
+                 }
+             }
+         }
+         return instance;
+     }
+
+     // overload getInstance without parameters for subsequent calls
+    // Return the already created instance of the screen
+    public  static  TerminalScreen getInstance(){
+        if (instance == null){
+            throw new IllegalStateException("Screen has not been initialized yet. Call getInstance(int, int, int) first.\"");
+        }
+        return instance;
+    }
 
 
       /**
@@ -57,6 +80,7 @@ public class TerminalScreen {
          this.cursorX = 0;
          this.cursorY = 0;
          this.isSetup = true;
+         System.out.println("Screen set up complete" + this.isSetup);
      }
 
      /**
@@ -66,8 +90,28 @@ public class TerminalScreen {
      */
 
      public boolean isSetup(){
-         return isSetup;
+         return this.isSetup;
      }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * Gets the current color mode of the screen.
+     *
+     * @return the current color mode (0: monochrome, 1: 16 colors, 2: 256 colors).
+     *
+     * @throws IllegalStateException if the screen has not been set up yet.
+     */
+    public int getColorMode(){
+        return colorMode;
+    }
+
 
     /**
      * Clear the screen by resetting all characters in the screen buffer to space (' ').
@@ -83,6 +127,7 @@ public class TerminalScreen {
          for (int i = 0; i < height; i++){
              for (int j = 0; j < width; j++){
                  screenBuffer[i][j] = ' ';
+                 colorBuffer[i][j] = 0;
              }
          }
      }
@@ -108,8 +153,9 @@ public class TerminalScreen {
              // place the character at the screen at the given position
              applyColor(colorIndex);
              screenBuffer[y][x] = c;
+             colorBuffer[y][x] = colorIndex;
          } else{
-             System.out.println("Invalid coordinates: (" + x + "," +y + ")");
+             System.out.println("Invalid coordinates: (" + x + "," + y + ")");
          }
      }
 
@@ -129,12 +175,13 @@ public class TerminalScreen {
 
          // print each row of the screen buffer
          for (int i = 0; i < height; i++){
+             StringBuilder line = new StringBuilder();
              for (int j = 0; j < width; j++){
                  applyColor(colorBuffer[i][j]);
-                 System.out.print(screenBuffer[i][j]);
+                 line.append(screenBuffer[i][j]);
                  resetColor();
              }
-             System.out.println();
+             System.out.println(line);
          }
      }
 
@@ -206,7 +253,7 @@ public class TerminalScreen {
          }
 
          // Ensure the cursor is within bounds
-         if (x >= 0 && x< width && y >= 0 && y < height) {
+         if (x >= 0 && x < width && y >= 0 && y < height) {
                 this.cursorX = x;
                 this.cursorY = y;
          }else{
@@ -328,20 +375,6 @@ public class TerminalScreen {
         }
 
         this.colorMode = colorMode;
-    }
-
-    /**
-     * Gets the current color mode of the screen.
-     *
-     * @return the current color mode (0: monochrome, 1: 16 colors, 2: 256 colors).
-     *
-     * @throws IllegalStateException if the screen has not been set up yet.
-     */
-    public int getColorMode(){
-        if (!isSetup){
-            throw new IllegalStateException("Screen not set up yet. Please set up the screen first.");
-        }
-        return colorMode;
     }
 }
 

@@ -3,7 +3,7 @@ package parser;
 import commands.*;
 import iterface.Command;
 import screen.TerminalScreen;
-import java.nio.ByteBuffer;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -19,6 +19,7 @@ import java.util.function.Function;
 public class CommandParser {
     // A map that associates command bytes with command factories
     private Map<Integer, Function<byte[], Command>> commandMap;
+    private TerminalScreen screen;
 
     /**
      * Constructor that initializes the command map with different command factories.
@@ -36,6 +37,8 @@ public class CommandParser {
         commandMap.put(0x6, this::createDrawAtCursorCommand);
         commandMap.put(0x7, this::createClearScreenCommand);
         commandMap.put(0xFF, this::createEndOfFileCommand);
+
+        this.screen = null;
     }
 
     /**
@@ -48,11 +51,8 @@ public class CommandParser {
      * @throws IllegalArgumentException if the command byte is not recognized.
      */
     public void parseAndExecute(int commandByte, byte[] data, TerminalScreen screen) {
-        if (screen == null){
-            throw new IllegalArgumentException("TerminalScreen is not set up");
-        }
         // check if the screen is set up before executing any commands
-        if (commandByte != 0x1 && !screen.isSetup()){
+        if (commandByte != 0x1 && (screen == null || !screen.isSetup())){
             throw new IllegalArgumentException("Error: Screen is not setup");
         }
         // Retrieve the command factory corresponding to the command byte
@@ -65,6 +65,8 @@ public class CommandParser {
 
         // Create the command instance using the factory and execute it
         Command command = commandFactory.apply(data);
+
+        // execute the command on the terminalScreen
         command.execute(screen, data);
     }
 
@@ -127,6 +129,9 @@ public class CommandParser {
 
         // Convert the remaining bytes (from index 2 to the second-last byte) into a string
         String text = new String(data, 2, data.length - 3);
+        if (text.isEmpty()) {
+            throw new IllegalArgumentException("Text field is empty.");
+        }
         return new RenderTextCommand(x, y, text, colorIndex);
     }
 
@@ -184,18 +189,47 @@ public class CommandParser {
     }
 
 
+    /**
+     * Creates a ClearScreenCommand object based on the provided data array.
+     * This method checks if the data array has exactly 3 elements and throws an
+     * IllegalArgumentException if the condition is not met.
+     *
+     * The ClearScreenCommand is typically used to instruct the screen to be cleared
+     * (i.e., all characters in the screen buffer are reset to empty).
+     *
+     * @param data - A byte array containing the command data. This array must contain exactly 3 elements
+     *               for the ClearScreenCommand to be created successfully.
+     *
+     * @return A new instance of ClearScreenCommand.
+     *
+     * @throws IllegalArgumentException if the data array does not have exactly 3 elements.
+     */
     private ClearScreenCommand createClearScreenCommand(byte[] data) {
-        if (data.length != 3){
+        if (data.length != 3) {
             throw new IllegalArgumentException("Data array should have exactly 3 elements for clearing the screen");
         }
-
-        return  new ClearScreenCommand();
+        return new ClearScreenCommand();
     }
 
+    /**
+     * Creates an EndOfFileCommand object based on the provided data array.
+     * This method checks if the data array has exactly 3 elements and throws an
+     * IllegalArgumentException if the condition is not met.
+     *
+     * The EndOfFileCommand typically signifies the end of a series of commands,
+     * indicating that no further commands will be processed.
+     *
+     * @param data - A byte array containing the command data. This array must contain exactly 3 elements
+     *               for the EndOfFileCommand to be created successfully.
+     *
+     * @return A new instance of EndOfFileCommand.
+     *
+     * @throws IllegalArgumentException if the data array does not have exactly 3 elements.
+     */
     private EndOfFileCommand createEndOfFileCommand(byte[] data) {
         if (data.length != 3) {
             throw new IllegalArgumentException("Data array must have exactly 3 elements for EndOfFileCommand");
         }
-        return  new EndOfFileCommand();
+        return new EndOfFileCommand();
     }
 }

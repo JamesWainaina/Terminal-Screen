@@ -42,8 +42,8 @@ public class CursorMovementCommand implements Command {
         }
 
         // extract coordinates from the data byte array
-        int x = data[0];
-        int y = data[1];
+        int x = Byte.toUnsignedInt(data[0]);
+        int y = Byte.toUnsignedInt(data[1]);
 
         // move the cursor to the specified position
         screen.moveCursor(x, y);

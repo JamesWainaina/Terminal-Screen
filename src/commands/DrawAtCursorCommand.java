@@ -46,7 +46,7 @@ public class DrawAtCursorCommand implements Command {
 
         // the data array can be used to pass character and colorIndex
         // Assuming the first byte is the color index and the second byte is the character.
-        char character = (char) data[0];
+        char character = (char) Byte.toUnsignedInt(data[0]);
         int colorIndex = data[1];
 
         // draw the character at the cursor's current position

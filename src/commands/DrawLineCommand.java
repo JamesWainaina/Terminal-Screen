@@ -55,6 +55,18 @@ public class DrawLineCommand implements Command {
         char character = (char) data[4];
         int colorIndex = Byte.toUnsignedInt(data[5]);
 
+        if (x1 < 0 || x1 >= screen.getWidth() || x2 < 0 || x2 >= screen.getWidth() ||
+                y1 < 0 || y1 >= screen.getHeight() || y2 < 0 || y2 >= screen.getHeight()) {
+            throw new IllegalArgumentException("Coordinates out of bounds.");
+        }
+        if (character < 32 || character > 126) {
+            throw new IllegalArgumentException("Invalid character. Only printable ASCII characters are allowed.");
+        }
+
+        if (colorIndex < 0 || colorIndex > 255) {
+            throw new IllegalArgumentException("Invalid color index. It must be between 0 and 255.");
+        }
+
         screen.drawLine(x1, y1, x2, y2, colorIndex, character);
 
         System.out.println("Line drawn from (" + x1 + ", " + y1 + ") to (" + x2 + ", " + y2 + ") with character '" + character + "' and color index " + colorIndex);

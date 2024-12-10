@@ -38,6 +38,6 @@ public class ScreenSetupCommand implements Command {
     @Override
     public void execute(TerminalScreen screen, byte[] data) {
         screen.setupScreen(width, height, colorMode);
-        System.out.println("screen setup complete: " + width + "x" +  height + ", Color Mode: "+  colorMode);
+        System.out.println("screen setup complete: " + screen.getWidth() + "x" +  screen.getHeight() + ", Color Mode: "+ screen.getColorMode());
     }
 }
