@@ -55,5 +55,6 @@ public class DrawCharacterCommand implements Command {
         screen.drawCharacter(x, y, character, colorIndex);
 
         System.out.println("Character '" + character + "' drawn at (" + x + ", " + y + ") with color index " + colorIndex);
+
     }
 }

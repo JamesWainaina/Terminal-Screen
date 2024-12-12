@@ -6,21 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="934d59e5-8db1-4e0d-86aa-fd23cd53fd94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/client/CommandClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/parser/CommandParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/parser/CommandParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawCharacterCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawCharacterCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/screen/TerminalScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/screen/TerminalScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/server/ScreenServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/server/ScreenServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CommandClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/CommandParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/parser/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screen/TerminalScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/TerminalScreen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/DrawCharacterCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawCharacterCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screen/TerminalScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/TerminalScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ScreenServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ScreenServer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ScreenServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ScreenServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,25 +35,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.CommandClient.executor&quot;: &quot;Debug&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ScreenServer.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/james/Terminal-Screen&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.CommandClient.executor": "Debug",
+    "Application.Main.executor": "Run",
+    "Application.ScreenServer.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/james/Terminal-Screen",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Application.ScreenServer">
     <configuration name="CommandClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.CommandClient" />
@@ -125,7 +115,9 @@
       <workItem from="1733787249034" duration="12463000" />
       <workItem from="1733852442102" duration="709000" />
       <workItem from="1733899894399" duration="11498000" />
-      <workItem from="1733985503879" duration="15818000" />
+      <workItem from="1733985503879" duration="21830000" />
+      <workItem from="1734023727675" duration="5644000" />
+      <workItem from="1734032433285" duration="6157000" />
     </task>
     <servers />
   </component>
@@ -145,6 +137,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/screen/TerminalScreen.java</url>
+          <line>193</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

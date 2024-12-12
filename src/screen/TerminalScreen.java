@@ -72,14 +72,28 @@ public class TerminalScreen {
      */
 
      public void setupScreen(int width, int height, int colorMode){
-         this.width = width;
-         this.height = height;
          this.colorMode = colorMode;
          this.screenBuffer = new char[height][width];
          this.colorBuffer = new int[height][width];
          this.cursorX = 0;
          this.cursorY = 0;
          this.isSetup = true;
+         this.height = height;
+         this.width = width;
+
+         // Initialize screenBuffer and colorBuffer
+         for (int i = 0; i < height; i++){
+             for (int j = 0; j < width; j++){
+                 if (i == 0 || i == height - 1){
+                     screenBuffer[i][j] = '-';
+                 } else if (j == 0 || j == width - 1){
+                     screenBuffer[i][j] = '|';
+                 }else {
+                     screenBuffer[i][j] = ' ';
+                     colorBuffer[i][j] = 0;
+                 }
+             }
+         }
      }
 
      /**
@@ -150,9 +164,12 @@ public class TerminalScreen {
          // ensure coordinates are within bounds
          if (x >= 0 && x < width && y >= 0 && y < height){
              // place the character at the screen at the given position
-             applyColor(colorIndex);
+
              screenBuffer[y][x] = c;
+             System.out.println("screenBuffer" + screenBuffer[y][x]);
              colorBuffer[y][x] = colorIndex;
+             System.out.println("color buffer " + colorBuffer[y][x]);
+
          } else{
              System.out.println("Invalid coordinates: (" + x + "," + y + ")");
          }
@@ -170,17 +187,19 @@ public class TerminalScreen {
          if (!isSetup){
              throw new IllegalStateException("Screen not set up yet. Please set up the screen first.");
          }
-         
+
 
          // print each row of the screen buffer
          for (int i = 0; i < height; i++){
              StringBuilder line = new StringBuilder();
              for (int j = 0; j < width; j++){
-                 applyColor(colorBuffer[i][j]);
+                 int colorIndex = colorBuffer[i][j];
                  line.append(screenBuffer[i][j]);
-                 resetColor();
+                 applyColor(colorIndex);
+                 System.out.print(screenBuffer[i][j]);
              }
-             System.out.println(line);
+             resetColor();
+             System.out.println();
          }
      }
 
@@ -276,7 +295,7 @@ public class TerminalScreen {
          }
 
          // draw the character at the cursor's current position
-         drawCharacter(cursorX, cursorY, c, colorIndex);
+         drawAtCursor(c, colorIndex);
      }
 
      /**
