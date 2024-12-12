@@ -23,7 +23,7 @@ public class TerminalScreen {
      * Constructor for initializing the screen.TerminalScreen object with given dimensions and color mode.
      * Initially, the screen is not set up until setupScreen() is called.
      *
-     * @param width - The width of createdthe screen (in characters).
+     * @param width - The width of created the screen (in characters).
      * @param height - The height of the screen (in characters).
      * @param colorMode - The color mode of the screen (0: monochrome, 1: 16 colors, 2: 256 colors).
      */
@@ -80,7 +80,6 @@ public class TerminalScreen {
          this.cursorX = 0;
          this.cursorY = 0;
          this.isSetup = true;
-         System.out.println("Screen set up complete" + this.isSetup);
      }
 
      /**

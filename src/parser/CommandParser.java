@@ -205,9 +205,6 @@ public class CommandParser {
      * @throws IllegalArgumentException if the data array does not have exactly 3 elements.
      */
     private ClearScreenCommand createClearScreenCommand(byte[] data) {
-        if (data.length != 3) {
-            throw new IllegalArgumentException("Data array should have exactly 3 elements for clearing the screen");
-        }
         return new ClearScreenCommand();
     }
 
@@ -227,9 +224,6 @@ public class CommandParser {
      * @throws IllegalArgumentException if the data array does not have exactly 3 elements.
      */
     private EndOfFileCommand createEndOfFileCommand(byte[] data) {
-        if (data.length != 3) {
-            throw new IllegalArgumentException("Data array must have exactly 3 elements for EndOfFileCommand");
-        }
         return new EndOfFileCommand();
     }
 }

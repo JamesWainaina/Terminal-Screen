@@ -6,16 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="934d59e5-8db1-4e0d-86aa-fd23cd53fd94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/client/CommandClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/ApplyColorCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/ApplyColorCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/ClearScreenCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/ClearScreenCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/Command.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/CursorMovementCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/CursorMovementCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawAtCursorCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawAtCursorCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawCharacterCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawCharacterCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawLineCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawLineCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/RenderTextCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/RenderTextCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/ScreenSetupCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/ScreenSetupCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/parser/CommandParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/parser/CommandParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/screen/TerminalScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/screen/TerminalScreen.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/server/ScreenServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/server/ScreenServer.class" afterDir="false" />
@@ -23,20 +15,6 @@
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/CommandClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearScreenCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearScreenCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ClearScreenCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ClearScreenCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/CursorMovementCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/CursorMovementCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/CursorMovementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/CursorMovementCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DrawLineCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawLineCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/DrawLineCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawLineCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/EndOfFileCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/EndOfFileCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/EndOfFileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/EndOfFileCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RenderTextCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RenderTextCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RenderTextCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RenderTextCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ScreenSetupCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ScreenSetupCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/ScreenSetupCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/ScreenSetupCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parser/CommandParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parser/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screen/TerminalScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/TerminalScreen.class" afterDir="false" />
@@ -69,6 +47,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.CommandClient.executor&quot;: &quot;Debug&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.ScreenServer.executor&quot;: &quot;Debug&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -85,7 +64,20 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ScreenServer">
+    <configuration name="CommandClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.CommandClient" />
+      <module name="Terminal-Screen" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ScreenServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.ScreenServer" />
       <module name="Terminal-Screen" />
@@ -102,14 +94,15 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ScreenServer" />
+        <item itemvalue="Application.CommandClient" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
-        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
       </set>
     </attachedChunks>
   </component>
@@ -130,6 +123,9 @@
       <workItem from="1733725724533" duration="10206000" />
       <workItem from="1733738929013" duration="19496000" />
       <workItem from="1733787249034" duration="12463000" />
+      <workItem from="1733852442102" duration="709000" />
+      <workItem from="1733899894399" duration="11498000" />
+      <workItem from="1733985503879" duration="15818000" />
     </task>
     <servers />
   </component>
@@ -149,28 +145,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/server/ScreenServer.java</url>
-          <line>101</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/server/ScreenServer.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/server/ScreenServer.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/server/ScreenServer.java</url>
-          <line>113</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

@@ -5,6 +5,8 @@ import screen.TerminalScreen;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The ScreenServer class is responsible for accepting client connections,
@@ -12,24 +14,20 @@ import java.net.Socket;
  * It uses a CommandParser to interpret and execute the received commands.
  */
 public class ScreenServer implements Runnable {
-    // Port number on which the server will listen for connections
-    private int port = 8000;
+    private int port = 8000; // Port number for the server
+    private TerminalScreen screen; // The screen that will be controlled by client commands
+    private CommandParser parser; // The parser for interpreting commands
+    private Map<Socket, Boolean> clientStates; // Track the setup state for each client
 
-    // The screen that will be controlled and updated by client commands
-    private TerminalScreen screen;
-
-    // The parser responsible for interpreting and executing commands
-    private CommandParser parser;
-
-    private boolean isSetup = false;
 
     /**
      * Constructor to initialize the ScreenServer.
-     * It initializes the CommandParser and the screen as null (not yet set up).
      */
     public ScreenServer() {
         this.parser = new CommandParser();
         this.screen = null; // The screen will be initialized when the setup command is received
+        this.clientStates = new HashMap<>(); // Initialize the client state map
+
     }
 
     /**
@@ -47,11 +45,13 @@ public class ScreenServer implements Runnable {
                 Socket socket = serverSocket.accept();
                 System.out.println("Accepted connection from " + socket.getRemoteSocketAddress());
 
-                // Handle the client connection (processing commands) in a separate method
+                // Initialize the client's setup state to false (not set up yet)
+                clientStates.put(socket, false);
+
+                // Handle the client connection (processing commands)
                 handleClientConnection(socket);
             }
         } catch (IOException e) {
-            // Print the stack trace if an I/O error occurs while running the server
             e.printStackTrace();
         }
     }
@@ -65,47 +65,59 @@ public class ScreenServer implements Runnable {
     private void handleClientConnection(Socket socket) {
         try (
                 InputStream input = socket.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true)
         ) {
-            String command;
+            byte[] buffer = new byte[256];
+            int bytesRead;
             // Reading the line from client and returns the line as a String
-            while ((command = reader.readLine()) != null) {
-                System.out.println("Received command: " + command);
-
-                // split the data
-                String[] parts = command.split(":");
-                // convert the command into a hexadecimal value
-                int commandType = Integer.parseInt(parts[0].replace("0x", ""), 16);
-                // split the data into individual values
-                String[] dataParts = parts[1].split(",");
-                byte[] data = new byte[dataParts.length];
-
-                for (int i = 0; i < dataParts.length; i++) {
-                    data[i] = Byte.parseByte(dataParts[i].trim(), 16);
+            while ((bytesRead = input.read(buffer)) != -1) {
+                if (bytesRead < 2) {
+                    // Command must have at least a command byte and a length byte
+                    writer.println("Error: Invalid command format.");
+                    continue;
                 }
 
-                System.out.println("Parsed command: " + commandType);
-                for (byte b : data) {
-                    System.out.println(b + " ");
+                // Extract the command byte and length byte
+                int commandType = buffer[0] & 0xFF;
+                int length = buffer[1] & 0xFF;
+
+                // check if the length is valid
+                if (length > bytesRead - 2){
+                    writer.println("Error: Invalid length byte.");
+                    continue;
                 }
-                System.out.println();
+
+                // Extract the bytes
+                byte[] data = new byte[length];
+                System.arraycopy(buffer, 2, data,0,length);
+
+                System.out.println("Received command: " + commandType);
+                System.out.println("Data length: " + length);
+
+                // get the client's current screen setup state
+                boolean isClientSetup = clientStates.get(socket);
 
                 if (commandType == 0x1) {
-                    int width = data[0];
-                    int height = data[1];
-                    int colorMode = data[2];
 
-
-                    if (screen == null){
-                        screen = TerminalScreen.getInstance(width, height, colorMode);
-                    } else {
-                        screen.setupScreen(width, height, colorMode);
+                    if (length != 3){
+                        writer.println("Error: Screen setup command requires exactly 3 bytes");
+                        continue;
                     }
+                    // Screen setup command
+                    int width = Byte.toUnsignedInt(data[0]);
+                    int height = Byte.toUnsignedInt(data[1]);
+                    int colorMode = Byte.toUnsignedInt(data[2]);
 
-                    isSetup = true;
-                    System.out.println("Screen setup " + isSetup);
+                    // Initialize or reinitialize the screen if needed
+                    if (screen == null) {
+                        screen = TerminalScreen.getInstance(width, height, colorMode);
+                    }
+                    screen.setupScreen(width, height, colorMode);
+
+                    // Update the client's state to "set up"
+                    clientStates.put(socket, true);
+
 
 
                     System.out.println("Screen setup complete: " + screen.getWidth() + " x " +
@@ -115,12 +127,14 @@ public class ScreenServer implements Runnable {
                     continue;
                 }
 
-                if (screen == null) {
+                // If the screen is not set up yet, return an error message
+                if (screen == null || !isClientSetup) {
                     writer.println("Error: Screen is not set up. Please set up the screen first.");
                     System.out.println("Error: Screen not set up");
                     continue;
                 }
 
+                // Process other commands only if the screen is set up
                 try {
                     parser.parseAndExecute(commandType, data, screen);
                     screen.renderScreen();
@@ -139,9 +153,11 @@ public class ScreenServer implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            // Remove client state when the client disconnects
+            clientStates.remove(socket);
         }
     }
-
 
     /**
      * The main method that starts the server in a separate thread.
