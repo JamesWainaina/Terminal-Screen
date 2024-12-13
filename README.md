@@ -1,4 +1,4 @@
-# Terminal Screen Project
+# Terminal Screen 
 
 ## Overview
 
