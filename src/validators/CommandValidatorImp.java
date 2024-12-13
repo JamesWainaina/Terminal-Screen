@@ -17,10 +17,10 @@ public class CommandValidatorImp implements CommandValidator {
         return command.matches(regex);
     }
 
+
     @Override
-    public boolean isValidCommand(String command) {
-        // Generic command format validation (can be extended to other command types)
-        String regex = "^0x[0-9A-Fa-f]+(:[0-9]+(,[0-9]+)*|(,[A-Za-z]))*$";
+    public boolean isValidDrawLineCommand(String command) {
+        String regex = "^0x3:[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+,-$";
         return command.matches(regex);
     }
 }

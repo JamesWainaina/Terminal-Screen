@@ -72,19 +72,18 @@ public class CommandClient {
                     }
                 }
 
-                // handle
-                // Handle other commands (can be extended to other types like '0x3', '0x4', etc.)
-                else if (isScreenSetup && input.startsWith("0x")) {
-                    if (commandValidator.isValidCommand(input)) {
+                // handle drawLine command
+                else if (isScreenSetup && input.startsWith("0x3")) {
+                    if (commandValidator.isValidDrawLineCommand(input)){
                         byte[] commandBytes = convertToBytes(input);
                         output.write(commandBytes);
-
                         String response = reader.readLine();
                         System.out.println("Server response: " + response);
                     } else {
-                        System.out.println("Invalid command format.");
+                        System.out.println("Invalid command format. Please use '0x3:x1,y1,x2,y2,colorIndex,-' for a dashed line.");
                     }
                 }
+
                 // If the screen is not set up, prevent other commands
                 else {
                     System.out.println("Error: Screen is not set up. Please send the screen setup command first.");
@@ -104,7 +103,7 @@ public class CommandClient {
         String[] params = parts[1].split(",");
 
         // Remove the "0x" prefix from the command type (if it exists) and parse as a hexadecimal number
-        int commandType = Integer.parseInt(commandHex.substring(2), 16);  // Remove "0x" and parse hex
+        int commandType = Integer.parseInt(commandHex.substring(2), 16);
 
         // Prepare the byte data for parameters
         byte[] data = new byte[params.length];
