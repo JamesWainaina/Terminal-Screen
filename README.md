@@ -88,11 +88,31 @@ Start by cloning the repository to your local machine:
 
 ```bash
 git clone <https://github.com/JamesWainaina/Terminal-Screen.git>
-cd <src>
-compile the code javac Main.java
-run the server
+```
+
+### Step 2: Change directory to src folder
+```bash
+cd src
+```
+
+### Step 3: Compile the code
+```bash
+javac Main.java
+```
+
+### Step 4: Run the server
+```bash
 java Main Server
-run the client
+```
+
+### Step 5: Run the client
+```bash
 java Main client localhost 8000
+```
+
+### Step 5: Send the commands 
+```bash
+0x1:10,10,0
+```
 
 
