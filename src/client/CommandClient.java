@@ -1,14 +1,23 @@
 package client;
 
+import validators.CommandValidator;
+import validators.CommandValidatorImp;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+
 
 public class CommandClient {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int PORT = 8000;
     private static boolean isScreenSetup = false;
 
+    private CommandValidator commandValidator;
+
+    public CommandClient() {
+        this.commandValidator = new CommandValidatorImp();
+    }
     public void run() {
         try (
                 Socket socket = new Socket(SERVER_ADDRESS, PORT);
@@ -33,7 +42,7 @@ public class CommandClient {
 
                 // Handle screen setup command
                 if (!isScreenSetup && input.startsWith("0x1")) {
-                    if (isValidSetupCommand(input)) {
+                    if (commandValidator.isValidSetupCommand(input)) {
                         byte[] commandBytes = convertToBytes(input);
                         output.write(commandBytes);
 
@@ -52,7 +61,7 @@ public class CommandClient {
                 }
                 // Handle drawCharacter command after screen setup
                 else if (isScreenSetup && input.startsWith("0x2")) {
-                    if (isValidDrawCharacterCommand(input)) {
+                    if (commandValidator.isValidDrawCharacterCommand(input)) {
                         byte[] commandBytes = convertToBytes(input);
                         output.write(commandBytes);
 
@@ -62,9 +71,11 @@ public class CommandClient {
                         System.out.println("Invalid command format. Please use '0x2:row,column,character,colorIndex'.");
                     }
                 }
+
+                // handle
                 // Handle other commands (can be extended to other types like '0x3', '0x4', etc.)
                 else if (isScreenSetup && input.startsWith("0x")) {
-                    if (isValidCommand(input)) {
+                    if (commandValidator.isValidCommand(input)) {
                         byte[] commandBytes = convertToBytes(input);
                         output.write(commandBytes);
 
@@ -118,24 +129,6 @@ public class CommandClient {
         System.arraycopy(data, 0, commandBytes, 2, length);  // Data bytes
 
         return commandBytes;
-    }
-
-    private static boolean isValidSetupCommand(String command) {
-        // Validate setup command format (e.g., '0x1:60,20,0')
-        String regex = "^0x1:[0-9]+,[0-9]+,[0-9]+$";
-        return command.matches(regex);
-    }
-
-    private static boolean isValidDrawCharacterCommand(String command) {
-        // Validate drawCharacter command format (e.g., '0x2:row,column,character,colorIndex')
-        String regex = "^0x2:[0-9]+,[0-9]+,[A-Za-z],[0-9]+$";
-        return command.matches(regex);
-    }
-
-    private static boolean isValidCommand(String command) {
-        // Generic command format validation (can be extended to other command types)
-        String regex = "^0x[0-9A-Fa-f]+(:[0-9]+(,[0-9]+)*|(,[A-Za-z]))*$";
-        return command.matches(regex);
     }
 
     public static void main(String[] args) {
