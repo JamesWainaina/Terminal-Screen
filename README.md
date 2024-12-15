@@ -1,4 +1,4 @@
-# Terminal Screen Project
+# Terminal Screen 
 
 ## Overview
 
@@ -88,11 +88,44 @@ Start by cloning the repository to your local machine:
 
 ```bash
 git clone <https://github.com/JamesWainaina/Terminal-Screen.git>
-cd <src>
-compile the code javac Main.java
-run the server
-java Main Server
-run the client
-java Main client localhost 8000
+```
 
+### Step 2: Change directory to src folder
+```bash
+cd src
+```
+
+### Step 3: Compile the code
+```bash
+javac Main.java
+```
+
+### Step 4: Run the server
+```bash
+java Main Server
+```
+
+### Step 5: Run the client
+```bash
+java Main client localhost 8000
+```
+
+### Step 5: Send the commands 
+```bash
+0x1:10,10,0
+```
+
+
+
+## What I love most about computing
+
+What I love most about computing is the power it has to solve problems, create new possibilities, and transform the way we interact with the world. Whether it's using algorithms to analyze data, enabling creative expression through design and art, or providing a platform for people to connect and collaborate, computing offers endless opportunities to innovate. I also find the way it constantly evolves and pushes the boundaries of what's possible—like advances in AI, quantum computing, and virtual reality—fascinating and inspiring! 
+
+
+## If you could meet any scientist or engineer who died before A.D. 2000
+If I could meet any scientist or engineer who died before A.D. 2000, I would choose Nikola Tesla. Tesla was a brilliant inventor, electrical engineer, and physicist, known for his groundbreaking work in alternating current (AC) power systems, wireless communication, and numerous other innovations that laid the foundation for much of modern technology.
+
+The reason I would choose Tesla is that he was not only a visionary who could foresee technological advancements far ahead of his time but also an enigmatic figure whose ideas often clashed with the scientific community of his era. I would love to ask him about his many uncompleted projects, his thoughts on the future of energy, wireless communication, and the challenges he faced in translating his groundbreaking ideas into practical applications. His ability to think in terms of large-scale systems—like the concept of global wireless communication—would be fascinating to discuss in the context of today’s world of interconnected networks and clean energy technology.
+
+Tesla’s unique combination of brilliance, creativity, and struggles in gaining widespread recognition during his lifetime makes him a particularly intriguing figure to meet.
 
