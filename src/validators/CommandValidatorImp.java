@@ -20,7 +20,7 @@ public class CommandValidatorImp implements CommandValidator {
 
     @Override
     public boolean isValidDrawLineCommand(String command) {
-        String regex = "^0x3:[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+,-$";
+        String regex = "^0x3:[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+,[\\x20-\\x7E]$";
         return command.matches(regex);
     }
 }

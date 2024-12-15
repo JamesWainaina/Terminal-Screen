@@ -295,7 +295,7 @@ public class TerminalScreen {
          }
 
          // draw the character at the cursor's current position
-         drawAtCursor(c, colorIndex);
+         drawCharacter(cursorX, cursorY, c, colorIndex);
      }
 
      /**

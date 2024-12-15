@@ -2,7 +2,6 @@ package client;
 
 import validators.CommandValidator;
 import validators.CommandValidatorImp;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;

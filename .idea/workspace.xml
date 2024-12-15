@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="934d59e5-8db1-4e0d-86aa-fd23cd53fd94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/CommandClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/validators/CommandValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/validators/CommandValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/validators/CommandValidatorImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidatorImp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screen/TerminalScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/TerminalScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/validators/CommandValidatorImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidatorImp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,25 +34,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CommandClient.executor": "Debug",
-    "Application.Main.executor": "Run",
-    "Application.ScreenServer.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/james/Terminal-Screen",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CommandClient.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ScreenServer.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/james/Terminal-Screen&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.ScreenServer">
     <configuration name="CommandClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.CommandClient" />
@@ -120,7 +117,9 @@
       <workItem from="1733985503879" duration="21830000" />
       <workItem from="1734023727675" duration="5644000" />
       <workItem from="1734032433285" duration="6717000" />
-      <workItem from="1734097975046" duration="5964000" />
+      <workItem from="1734097975046" duration="6576000" />
+      <workItem from="1734156340235" duration="1335000" />
+      <workItem from="1734251209420" duration="2838000" />
     </task>
     <servers />
   </component>

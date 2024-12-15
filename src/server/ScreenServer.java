@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * The ScreenServer class is responsible for accepting client connections,
@@ -26,7 +27,7 @@ public class ScreenServer implements Runnable {
     public ScreenServer() {
         this.parser = new CommandParser();
         this.screen = null; // The screen will be initialized when the setup command is received
-        this.clientStates = new HashMap<>(); // Initialize the client state map
+        this.clientStates = new ConcurrentHashMap<>(); // Initialize the client state map
 
     }
 
@@ -49,7 +50,7 @@ public class ScreenServer implements Runnable {
                 clientStates.put(socket, false);
 
                 // Handle the client connection (processing commands)
-                handleClientConnection(socket);
+               new Thread(() -> handleClientConnection(socket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
