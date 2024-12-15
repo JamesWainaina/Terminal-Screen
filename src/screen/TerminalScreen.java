@@ -342,35 +342,76 @@ public class TerminalScreen {
      * @param x2 - Ending x-coordinate.
      * @param y2 - Ending y-coordinate.
      * @param colorIndex - The color index
-     * @param character - The character to use for drawing the line.
      *
      * @throws IllegalStateException if the screen has not been set up yet.
      */
 
-     public void drawLine(int x1, int y1, int x2, int y2, int colorIndex, char character){
-         if (!isSetup){
-             throw new IllegalStateException("Screen not set up yet.Please set up the screen first.");
+     public void drawLine(int x1, int y1, int x2, int y2, int colorIndex) {
+         if (!isSetup) {
+             throw new IllegalStateException("Screen not set up yet. Please set up the screen first.");
+         }
+
+         // Print the parameters to debug
+         System.out.println("drawLine called with parameters:");
+         System.out.println("x1: " + x1 + ", y1: " + y1 + ", x2: " + x2 + ", y2: " + y2);
+         System.out.println("colorIndex: " + colorIndex);
+
+         // Determine the correct character to use based on the line direction
+         char character;
+         if (x1 == x2) {
+             // Vertical line
+             character = '|';
+         } else if (y1 == y2) {
+             // Horizontal line
+             character = '-';
+         } else if ((x2 - x1) > 0 && (y2 - y1) > 0) {
+             // Diagonal from top-left to bottom-right
+             character = '/';
+         } else if ((x2 - x1) < 0 && (y2 - y1) > 0) {
+             // Diagonal from top-right to bottom-left
+             character = '\\';
+         } else if ((x2 - x1) > 0 && (y2 - y1) < 0) {
+             // Diagonal from bottom-left to top-right
+             character = '\\';
+         } else if ((x2 - x1) < 0 && (y2 - y1) < 0) {
+             // Diagonal from bottom-right to top-left
+             character = '/';
+         } else {
+             throw new IllegalArgumentException("Invalid line direction.");
          }
 
          // Bresenham's line algorithm
-         int dx = Math.abs(x2 - x1); // direction in the x direction
-         int dy = Math.abs(y2 - y1); // direction in the y direction
-         int sx = (x1 < x2) ? 1 : -1;// error handling
-         int sy = (y1 < y2) ? 1 : -1; // error handling
+         int dx = Math.abs(x2 - x1); // Direction in the x direction
+         int dy = Math.abs(y2 - y1); // Direction in the y direction
+         int sx = (x1 < x2) ? 1 : -1; // Error handling for x direction
+         int sy = (y1 < y2) ? 1 : -1; // Error handling for y direction
          int err = dx - dy;
 
-         while (true){
-             drawCharacter(x1, y1, character, colorIndex);
-             if (x1 == x2  && y1 == y2) break;
+         System.out.println("Initial dx: " + dx + ", dy: " + dy);
+         System.out.println("Initial error: " + err);
+
+         while (true) {
+             // Print each coordinate as it is drawn
+             System.out.println("Drawing character '" + character + "' at (" + x1 + ", " + y1 + ")");
+             drawCharacter(x1, y1, character, colorIndex); // Use the chosen character
+
+             // If we've reached the destination, exit
+             if (x1 == x2 && y1 == y2) break;
+
              int e2 = err * 2;
              if (e2 > -dy) {
                  err -= dy;
                  x1 += sx;
              }
-             if (e2 < dx) {err += dx; y1 += sy;}
+             if (e2 < dx) {
+                 err += dx;
+                 y1 += sy;
+             }
          }
+         System.out.println("Line drawing complete.");
      }
 
+     
 
     /**
      * This method simulates the end-of-file (EOF) behavior in the terminal.

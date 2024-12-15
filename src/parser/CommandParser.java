@@ -3,7 +3,7 @@ package parser;
 import commands.*;
 import iterface.Command;
 import screen.TerminalScreen;
-
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -91,6 +91,7 @@ public class CommandParser {
         return new DrawCharacterCommand(x, y, character, colorIndex);
     }
 
+
     /**
      * Creates an instance of DrawLineCommand using the provided data array.
      *
@@ -99,17 +100,26 @@ public class CommandParser {
      * @throws IllegalArgumentException if the data array is invalid.
      */
     private DrawLineCommand createDrawLineCommand(byte[] data) {
-        if (data.length != 6) {
-            throw new IllegalArgumentException("Data array must have exactly 6 elements for DrawLineCommand");
+        if (data.length != 5) {
+            throw new IllegalArgumentException("Data array must have exactly 5 elements for DrawLineCommand");
         }
+
+        // Debugging the byte data before creating the command
+        System.out.println("Creating DrawLineCommand with data: " + Arrays.toString(data));
+
         int x1 = data[0];
         int y1 = data[1];
         int x2 = data[2];
         int y2 = data[3];
         int colorIndex = data[4];
-        char character = (char) data[5];
 
-        return new DrawLineCommand(x1, y1, x2, y2, colorIndex, character);
+        // The character will be determined dynamically inside the DrawLineCommand
+        DrawLineCommand command = new DrawLineCommand(x1, y1, x2, y2, colorIndex);
+
+        // Debugging the created command object
+        System.out.println("Created DrawLineCommand: " + command);
+
+        return command;
     }
 
     /**

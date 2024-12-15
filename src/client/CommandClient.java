@@ -79,7 +79,7 @@ public class CommandClient {
                         String response = reader.readLine();
                         System.out.println("Server response: " + response);
                     } else {
-                        System.out.println("Invalid command format. Please use '0x3:x1,y1,x2,y2,colorIndex,-' for a dashed line.");
+                        System.out.println("Invalid command format. Please use '0x3:x1,y1,x2,y2,colorIndex for a dashed line.");
                     }
                 }
 
@@ -95,39 +95,53 @@ public class CommandClient {
         }
     }
 
+
     // Convert the command string to the correct byte format
     private static byte[] convertToBytes(String command) {
-        String[] parts = command.split(":");
-        String commandHex = parts[0];
-        String[] params = parts[1].split(",");
+        try {
+            String[] parts = command.split(":");
+            String commandHex = parts[0];
+            String[] params = parts[1].split(",");
 
-        // Remove the "0x" prefix from the command type (if it exists) and parse as a hexadecimal number
-        int commandType = Integer.parseInt(commandHex.substring(2), 16);
+            // Remove the "0x" prefix from the command type (if it exists) and parse as a hexadecimal number
+            int commandType = Integer.parseInt(commandHex.substring(2), 16);
 
-        // Prepare the byte data for parameters
-        byte[] data = new byte[params.length];
-        for (int i = 0; i < params.length; i++) {
-            if (params[i].matches("[0-9]+")) { // if it's a number
-                data[i] = (byte) Integer.parseInt(params[i]);
-            } else if (params[i].matches("[A-Za-z]")) { // if it's a character
-                data[i] = (byte) params[i].charAt(0);
-            } else {
-                System.out.println("Error: Invalid parameter format.");
-                return new byte[0];
+            // Prepare the byte data for parameters
+            byte[] data = new byte[params.length];
+            for (int i = 0; i < params.length; i++) {
+                String param = params[i].trim();
+                if (param.matches("[0-9]+")) { // if it's a number
+                    int intValue = Integer.parseInt(param);
+                    if (intValue > 255) {
+                        System.out.println("Error: Parameter value out of byte range.");
+                        return new byte[0];
+                    }
+                    data[i] = (byte) intValue;
+                } else if (param.matches("[A-Za-z]")) { // if it's a character
+                    data[i] = (byte) param.charAt(0);
+                } else {
+                    System.out.println("Error: Invalid parameter format.");
+                    return new byte[0];
+                }
             }
+
+            // The length byte is the number of parameters
+            int length = data.length;
+
+            // Create a byte array with the structure: [commandType, length, data...]
+            byte[] commandBytes = new byte[2 + length];
+            commandBytes[0] = (byte) commandType;  // Command type byte
+            commandBytes[1] = (byte) length;       // Length byte
+            System.arraycopy(data, 0, commandBytes, 2, length);  // Data bytes
+
+            return commandBytes;
+
+        } catch (Exception e) {
+            System.out.println("Error: Malformed command.");
+            return new byte[0];
         }
-
-        // The length byte is the number of parameters
-        int length = data.length;
-
-        // Create a byte array with the structure: [commandType, length, data...]
-        byte[] commandBytes = new byte[2 + length];
-        commandBytes[0] = (byte) commandType;  // Command type byte
-        commandBytes[1] = (byte) length;       // Length byte
-        System.arraycopy(data, 0, commandBytes, 2, length);  // Data bytes
-
-        return commandBytes;
     }
+
 
     public static void main(String[] args) {
         CommandClient client = new CommandClient();
