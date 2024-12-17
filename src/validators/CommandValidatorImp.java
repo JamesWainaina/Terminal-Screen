@@ -24,4 +24,11 @@ public class CommandValidatorImp implements CommandValidator {
         return command.matches(regex);
     }
 
+    @Override
+    public boolean isValidRenderTextCommand(String command) {
+        // This will now allow multi-character text (letters, digits, spaces, punctuation)
+        String regex = "^0x4:[0-9]+,[0-9]+,[\\w\\s\\p{Punct}]+,[0-9]+$";
+        return command.matches(regex);
+    }
+
 }

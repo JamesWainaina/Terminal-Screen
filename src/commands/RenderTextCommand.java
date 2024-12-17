@@ -43,7 +43,7 @@ public class RenderTextCommand implements Command {
             throw new IllegalArgumentException("Insufficient data to render text. Expected coordinates and text.");
         }
 
-        screen.renderText(x, y, colorIndex, text);
+        screen.renderText(x, y, text, colorIndex);
         System.out.println("Text '" + text + "' rendered at position (" + x + ", " + y + ") with color index " + colorIndex + ".");
     }
 }

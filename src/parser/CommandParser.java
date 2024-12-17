@@ -3,6 +3,8 @@ package parser;
 import commands.*;
 import iterface.Command;
 import screen.TerminalScreen;
+
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -100,7 +102,7 @@ public class CommandParser {
      * @throws IllegalArgumentException if the data array is invalid.
      */
     private DrawLineCommand createDrawLineCommand(byte[] data) {
-        if (data.length != 5) {
+        if (data.length < 5) {
             throw new IllegalArgumentException("Data array must have exactly 5 elements for DrawLineCommand");
         }
 
@@ -133,12 +135,16 @@ public class CommandParser {
         if (data.length < 4) {
             throw new IllegalArgumentException("Data array must have at least 4 elements for RenderTextCommand");
         }
-        int x = data[0];
-        int y = data[1];
-        int colorIndex = data[data.length - 1]; // Color index is the last byte
+
+        // Extract x,y and colorIndex from the data byte array
+        int x = Byte.toUnsignedInt(data[0]);
+        int y =  Byte.toUnsignedInt(data[1]);
+        int colorIndex = Byte.toUnsignedInt(data[data.length-1]);
 
         // Convert the remaining bytes (from index 2 to the second-last byte) into a string
-        String text = new String(data, 2, data.length - 3);
+        String text = new String(data, 2, data.length - 3, StandardCharsets.UTF_8);
+
+        System.out.println("Extracted text: '" + text + "'");
         if (text.isEmpty()) {
             throw new IllegalArgumentException("Text field is empty.");
         }

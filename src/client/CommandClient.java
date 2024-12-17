@@ -4,6 +4,9 @@ import validators.CommandValidator;
 import validators.CommandValidatorImp;
 import java.io.*;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -83,6 +86,18 @@ public class CommandClient {
                     }
                 }
 
+                //handle render text command
+                else if (isScreenSetup && input.startsWith("0x4")) {
+                    if (commandValidator.isValidRenderTextCommand(input)){
+                        byte[] commandBytes = convertToBytes(input);
+                        output.write(commandBytes);
+                        String response = reader.readLine();
+                        System.out.println("Server response: " + response);
+                    }else{
+                        System.out.println("Invalid command format.Please use 0x4:row, column , text, colorIndex");
+                    }
+                }
+
                 // If the screen is not set up, prevent other commands
                 else {
                     System.out.println("Error: Screen is not set up. Please send the screen setup command first.");
@@ -103,44 +118,57 @@ public class CommandClient {
             String commandHex = parts[0];
             String[] params = parts[1].split(",");
 
-            // Remove the "0x" prefix from the command type (if it exists) and parse as a hexadecimal number
             int commandType = Integer.parseInt(commandHex.substring(2), 16);
 
-            // Prepare the byte data for parameters
-            byte[] data = new byte[params.length];
-            for (int i = 0; i < params.length; i++) {
-                String param = params[i].trim();
-                if (param.matches("[0-9]+")) { // if it's a number
-                    int intValue = Integer.parseInt(param);
-                    if (intValue > 255) {
-                        System.out.println("Error: Parameter value out of byte range.");
-                        return new byte[0];
+            List<Byte> dataList = new ArrayList<>();
+            for (String param : params) {
+                param = param.trim();
+                if (param.matches("[0-9]+")) {
+                    dataList.add(parseNumber(param));
+                } else if (param.matches("[A-Za-z\\s\\p{Punct}]+")) {
+                    byte[] textBytes = parseText(param);
+                    for (byte b : textBytes) {
+                        dataList.add(b);
                     }
-                    data[i] = (byte) intValue;
-                } else if (param.matches("[A-Za-z]")) { // if it's a character
-                    data[i] = (byte) param.charAt(0);
                 } else {
                     System.out.println("Error: Invalid parameter format.");
                     return new byte[0];
                 }
             }
 
-            // The length byte is the number of parameters
-            int length = data.length;
-
-            // Create a byte array with the structure: [commandType, length, data...]
-            byte[] commandBytes = new byte[2 + length];
-            commandBytes[0] = (byte) commandType;  // Command type byte
-            commandBytes[1] = (byte) length;       // Length byte
-            System.arraycopy(data, 0, commandBytes, 2, length);  // Data bytes
-
-            return commandBytes;
-
+            return buildCommandBytes(commandType, dataList);
         } catch (Exception e) {
             System.out.println("Error: Malformed command.");
             return new byte[0];
         }
     }
+
+    private static byte parseNumber(String param) {
+        int intValue = Integer.parseInt(param);
+        if (intValue > 255) {
+            System.out.println("Error: Parameter value out of byte range.");
+            return 0;
+        }
+        return (byte) intValue;
+    }
+
+    private static byte[] parseText(String param) {
+        return param.getBytes(StandardCharsets.UTF_8);
+    }
+
+    private static byte[] buildCommandBytes(int commandType, List<Byte> dataList) {
+        byte[] data = new byte[dataList.size()];
+        for (int i = 0; i < dataList.size(); i++) {
+            data[i] = dataList.get(i);
+        }
+        int length = data.length;
+        byte[] commandBytes = new byte[2 + length];
+        commandBytes[0] = (byte) commandType;
+        commandBytes[1] = (byte) length;
+        System.arraycopy(data, 0, commandBytes, 2, length);
+        return commandBytes;
+    }
+
 
 
     public static void main(String[] args) {

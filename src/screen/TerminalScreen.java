@@ -309,7 +309,7 @@ public class TerminalScreen {
      * @throws IllegalStateException if the screen has not been set up yet.
      */
 
-     public void renderText(int x, int y, int colorIndex, String text){
+     public void renderText(int x, int y, String text, int colorIndex){
          if (!isSetup){
              throw new IllegalStateException("Screen not set up yet. Please set up the screen first.");
          }
@@ -366,16 +366,16 @@ public class TerminalScreen {
              character = '-';
          } else if ((x2 - x1) > 0 && (y2 - y1) > 0) {
              // Diagonal from top-left to bottom-right
-             character = '/';
+             character = '\\';
          } else if ((x2 - x1) < 0 && (y2 - y1) > 0) {
              // Diagonal from top-right to bottom-left
-             character = '\\';
+             character = '/';
          } else if ((x2 - x1) > 0 && (y2 - y1) < 0) {
              // Diagonal from bottom-left to top-right
-             character = '\\';
+             character = '/';
          } else if ((x2 - x1) < 0 && (y2 - y1) < 0) {
              // Diagonal from bottom-right to top-left
-             character = '/';
+             character = '\\';
          } else {
              throw new IllegalArgumentException("Invalid line direction.");
          }
@@ -411,7 +411,7 @@ public class TerminalScreen {
          System.out.println("Line drawing complete.");
      }
 
-     
+
 
     /**
      * This method simulates the end-of-file (EOF) behavior in the terminal.

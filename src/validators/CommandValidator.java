@@ -10,4 +10,7 @@ public interface CommandValidator {
 
     // Method for drawLine command
     boolean isValidDrawLineCommand(String command);
+
+    // Method for renderText command
+    boolean isValidRenderTextCommand(String command);
 }
