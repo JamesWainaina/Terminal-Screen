@@ -50,4 +50,13 @@ public class CommandValidatorImp implements CommandValidator {
         return command.matches(regex);
     }
 
+    @Override
+    public boolean isValidEndOfFileCommand(String command) {
+        // Trim spaces before validation
+        command = command.trim();
+        String regex = "^0xFF$";
+        return command.matches(regex);
+    }
+
+
 }

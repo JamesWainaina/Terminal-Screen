@@ -22,4 +22,7 @@ public interface CommandValidator {
 
     // Method to clear screen
     boolean isValidClearScreenCommand(String command);
+
+    // Method to mark End of file
+    boolean isValidEndOfFileCommand(String command);
 }

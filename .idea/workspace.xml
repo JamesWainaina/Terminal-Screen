@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/CommandClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/EndOfFileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/EndOfFileCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ScreenServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ScreenServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/validators/CommandValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/validators/CommandValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/validators/CommandValidatorImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidatorImp.class" afterDir="false" />
@@ -125,7 +127,7 @@
       <workItem from="1734251209420" duration="2838000" />
       <workItem from="1734270082776" duration="11955000" />
       <workItem from="1734331441998" duration="10630000" />
-      <workItem from="1734418560564" duration="12679000" />
+      <workItem from="1734418560564" duration="13871000" />
     </task>
     <servers />
   </component>

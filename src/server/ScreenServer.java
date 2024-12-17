@@ -95,6 +95,13 @@ public class ScreenServer implements Runnable {
                 System.out.println("Received command: " + commandType);
                 System.out.println("Data length: " + length);
 
+                // check the EOF command (0xFF)
+                if (commandType == 0xFF){
+                    writer.println("End of file reached.Stopping command Processing");
+                    System.out.println("End of file reached. Closing connection");
+                    break;
+                }
+
                 // get the client's current screen setup state
                 boolean isClientSetup = clientStates.get(socket);
 

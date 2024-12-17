@@ -130,7 +130,19 @@ public class CommandClient {
                         String response = reader.readLine();
                         System.out.println("Server response: " + response);
                     } else {
-                        System.out.println("Invalid command format.Please use 0x7:");
+                        System.out.println("Invalid command format.Please use 0x7");
+                    }
+                }
+
+                // handle end of file command
+                else if (isScreenSetup && input.startsWith("0xFF")) {
+                    if (commandValidator.isValidEndOfFileCommand(input)){
+                        byte[] commandBytes = convertToBytes(input);
+                        output.write(commandBytes);
+                        String response = reader.readLine();
+                        System.out.println("Server response: " + response);
+                    } else {
+                        System.out.println("Invalid command format. Please use 0xFF");
                     }
                 }
 
@@ -154,7 +166,7 @@ public class CommandClient {
             String[] parts = command.split(":");
             String commandHex = parts[0];
             // Handle the case where there might be no parameters for certain commands like 0x7
-            String[] params = parts.length > 1 ? parts[1].split(",") : new String[0]; 
+            String[] params = parts.length > 1 ? parts[1].split(",") : new String[0];
 
             // Convert the command type from hex to integer
             int commandType = Integer.parseInt(commandHex.substring(2), 16);
