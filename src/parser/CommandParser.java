@@ -2,6 +2,7 @@ package parser;
 
 import commands.*;
 import iterface.Command;
+import jdk.jfr.Unsigned;
 import screen.TerminalScreen;
 
 import java.nio.charset.StandardCharsets;
@@ -102,7 +103,7 @@ public class CommandParser {
      * @throws IllegalArgumentException if the data array is invalid.
      */
     private DrawLineCommand createDrawLineCommand(byte[] data) {
-        if (data.length < 5) {
+        if (data.length != 5) {
             throw new IllegalArgumentException("Data array must have exactly 5 elements for DrawLineCommand");
         }
 
@@ -160,10 +161,11 @@ public class CommandParser {
      */
     private CursorMovementCommand createCursorMovementCommand(byte[] data) {
         if (data.length != 2) {
-            throw new IllegalArgumentException("Data array must have exactly 2 elements for CursorMovementCommand");
+            throw new IllegalArgumentException("Data array must have exactly 3 elements for CursorMovementCommand");
         }
-        int x = data[0];
-        int y = data[1];
+        int x = Byte.toUnsignedInt(data[0]);
+        int y = Byte.toUnsignedInt(data[1]);
+
 
         return new CursorMovementCommand(x, y);
     }
@@ -179,8 +181,11 @@ public class CommandParser {
         if (data.length != 2) {
             throw new IllegalArgumentException("Data array must have exactly 2 elements for DrawAtCursorCommand");
         }
-        char character = (char) data[0];
-        int colorIndex = data[1];
+        // Convert the first byte (data[0]) to an unsigned integer and then to a char
+        char character = (char) Byte.toUnsignedInt(data[0]);
+
+        // Convert the second byte (data[1]) to an unsigned integer for the color index
+        int colorIndex = Byte.toUnsignedInt(data[1]);
 
         return new DrawAtCursorCommand(character, colorIndex);
     }

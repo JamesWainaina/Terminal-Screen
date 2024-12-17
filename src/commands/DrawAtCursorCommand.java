@@ -36,7 +36,7 @@ public class DrawAtCursorCommand implements Command {
     public void execute(TerminalScreen terminalScreen, byte[] data) {
         // check if the screen is set up before drawing
         if (!terminalScreen.isSetup()){
-            throw new IllegalArgumentException("Screen is not set ip.Please set up the screen first.");
+            throw new IllegalArgumentException("Screen is not set up.Please set up the screen first.");
         }
 
         // Ensure that the data array has enough bytes (at least 2)
@@ -44,10 +44,6 @@ public class DrawAtCursorCommand implements Command {
             throw new IllegalArgumentException("Data array must contain at least 2 bytes: character and color index.");
         }
 
-        // the data array can be used to pass character and colorIndex
-        // Assuming the first byte is the color index and the second byte is the character.
-        char character = (char) Byte.toUnsignedInt(data[0]);
-        int colorIndex = data[1];
 
         // draw the character at the cursor's current position
         terminalScreen.drawAtCursor(character, colorIndex);

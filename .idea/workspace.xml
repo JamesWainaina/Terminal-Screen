@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="934d59e5-8db1-4e0d-86aa-fd23cd53fd94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/client/CommandClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawLineCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/commands/DrawLineCommand.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/parser/CommandParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/parser/CommandParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/screen/TerminalScreen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/screen/TerminalScreen.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Terminal-Screen/validators/CommandValidatorImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Terminal-Screen/validators/CommandValidatorImp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/CommandClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/RenderTextCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/RenderTextCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/CursorMovementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/CursorMovementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawAtCursorCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands/DrawLineCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/DrawLineCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/parser/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screen/TerminalScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/screen/TerminalScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/validators/CommandValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidator.class" afterDir="false" />
@@ -133,7 +130,7 @@
       <workItem from="1734251209420" duration="2838000" />
       <workItem from="1734270082776" duration="11955000" />
       <workItem from="1734331441998" duration="10630000" />
-      <workItem from="1734418560564" duration="4186000" />
+      <workItem from="1734418560564" duration="11540000" />
     </task>
     <servers />
   </component>
@@ -153,58 +150,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/DrawLineCommand.java</url>
-          <line>62</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/DrawLineCommand.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/DrawLineCommand.java</url>
-          <line>43</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/DrawLineCommand.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/DrawLineCommand.java</url>
-          <line>45</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/DrawLineCommand.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/DrawLineCommand.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/commands/RenderTextCommand.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/parser/CommandParser.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/screen/TerminalScreen.java</url>
-          <line>329</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

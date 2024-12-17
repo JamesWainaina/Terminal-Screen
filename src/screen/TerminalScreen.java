@@ -274,6 +274,7 @@ public class TerminalScreen {
          if (x >= 0 && x < width && y >= 0 && y < height) {
                 this.cursorX = x;
                 this.cursorY = y;
+
          }else{
              System.out.println("Invalid cursor coordinates: (" + x + ", " + y + ")");
          }

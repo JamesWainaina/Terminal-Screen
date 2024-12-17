@@ -40,14 +40,7 @@ public class DrawLineCommand implements Command {
 
     @Override
     public void execute(TerminalScreen screen, byte[] data) {
-        // Extract values from the data byte array
-        int x1 = Byte.toUnsignedInt(data[0]);
-        int y1 = Byte.toUnsignedInt(data[1]);
-        int x2 = Byte.toUnsignedInt(data[2]);
-        int y2 = Byte.toUnsignedInt(data[3]);
-        int colorIndex = Byte.toUnsignedInt(data[4]);
 
-        // Validate the input data
         if (x1 < 0 || x1 >= screen.getWidth() || x2 < 0 || x2 >= screen.getWidth() ||
                 y1 < 0 || y1 >= screen.getHeight() || y2 < 0 || y2 >= screen.getHeight()) {
             throw new IllegalArgumentException("Coordinates out of bounds.");

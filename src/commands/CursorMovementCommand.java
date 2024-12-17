@@ -13,16 +13,18 @@ public class CursorMovementCommand implements Command {
     private int x; // x-coordinate 
     private int y; // y-coordinate
 
+
     /**
      * Constructor for the CursorMovementCommand.
      *
-     * @param x - The x-coordinate to move the cursor to.
-     * @param y - The y-coordinate to move the cursor to.
+     * @param x         - The x-coordinate to move the cursor to.
+     * @param y         - The y-coordinate to move the cursor to.
      */
 
     public CursorMovementCommand(int x , int y){
         this.x = x;
         this.y = y;
+
     }
 
     /**
@@ -34,21 +36,15 @@ public class CursorMovementCommand implements Command {
 
     @Override
     public void execute(TerminalScreen screen, byte[] data) {
-        // The 'data' array is expected to contain the coordinated of the cursor
-        // Extract coordinates from the data byte array
-        // Validate that data contains the expected two bytes for coordinates
+        // validate the length of the data
         if (data.length < 2) {
             throw new IllegalArgumentException("Invalid data: expected at least 2 bytes for x and y coordinates.");
         }
 
-        // extract coordinates from the data byte array
-        int x = Byte.toUnsignedInt(data[0]);
-        int y = Byte.toUnsignedInt(data[1]);
-
         // move the cursor to the specified position
         screen.moveCursor(x, y);
-
     }
+
 }
 
 

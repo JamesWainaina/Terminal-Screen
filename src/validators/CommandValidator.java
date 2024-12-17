@@ -13,4 +13,10 @@ public interface CommandValidator {
 
     // Method for renderText command
     boolean isValidRenderTextCommand(String command);
+
+    // Method to move the cursor
+    boolean isValidMoveCursorCommand(String command);
+
+    // Method to drawAtCursor
+    boolean isValidDrawAtCursorCommand(String command);
 }

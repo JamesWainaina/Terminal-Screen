@@ -82,7 +82,7 @@ public class CommandClient {
                         String response = reader.readLine();
                         System.out.println("Server response: " + response);
                     } else {
-                        System.out.println("Invalid command format. Please use '0x3:x1,y1,x2,y2,colorIndex for a dashed line.");
+                        System.out.println("Invalid command format. Please use '0x3:x1, y1, x2, y2, colorIndex");
                     }
                 }
 
@@ -95,6 +95,30 @@ public class CommandClient {
                         System.out.println("Server response: " + response);
                     }else{
                         System.out.println("Invalid command format.Please use 0x4:row, column , text, colorIndex");
+                    }
+                }
+
+                // handle move cursor command
+                else if (isScreenSetup && input.startsWith("0x5")) {
+                    if (commandValidator.isValidMoveCursorCommand(input)){
+                        byte[] commandBytes = convertToBytes(input);
+                        output.write(commandBytes);
+                        String response = reader.readLine();
+                        System.out.println("Server response: " + response);
+                    }else {
+                        System.out.println("Invalid command format.Please use 0x5:row, column");
+                    }
+                }
+
+                // handle draw at cursor command
+                else if (isScreenSetup && input.startsWith("0x6")) {
+                    if (commandValidator.isValidDrawAtCursorCommand(input)){
+                        byte[] commandBytes = convertToBytes(input);
+                        output.write(commandBytes);
+                        String response = reader.readLine();
+                        System.out.println("Server response: " + response);
+                    }else {
+                        System.out.println("Invalid command format. Please use 0x6:character, colorIndex");
                     }
                 }
 
@@ -120,6 +144,12 @@ public class CommandClient {
 
             int commandType = Integer.parseInt(commandHex.substring(2), 16);
 
+            // Check for the drawLine command (0x3) and ensure it has exactly 5 parameters
+            if (commandType == 3 && params.length != 5) {
+                System.out.println("Error: DrawLine command must have exactly 5 parameters (x1, y1, x2, y2, colorIndex).");
+                return new byte[0];
+            }
+
             List<Byte> dataList = new ArrayList<>();
             for (String param : params) {
                 param = param.trim();
@@ -143,6 +173,7 @@ public class CommandClient {
         }
     }
 
+    // function to parse number
     private static byte parseNumber(String param) {
         int intValue = Integer.parseInt(param);
         if (intValue > 255) {
@@ -152,6 +183,7 @@ public class CommandClient {
         return (byte) intValue;
     }
 
+    // function to parse text
     private static byte[] parseText(String param) {
         return param.getBytes(StandardCharsets.UTF_8);
     }
