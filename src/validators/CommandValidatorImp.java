@@ -44,4 +44,10 @@ public class CommandValidatorImp implements CommandValidator {
         return command.matches(regex);
     }
 
+    @Override
+    public boolean isValidClearScreenCommand(String command) {
+        String regex = "^0x7$";
+        return command.matches(regex);
+    }
+
 }

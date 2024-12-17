@@ -122,6 +122,18 @@ public class CommandClient {
                     }
                 }
 
+                // handle clear screen command
+                else if (isScreenSetup && input.startsWith("0x7")){
+                    if (commandValidator.isValidClearScreenCommand(input)){
+                        byte[] commandBytes = convertToBytes(input);
+                        output.write(commandBytes);
+                        String response = reader.readLine();
+                        System.out.println("Server response: " + response);
+                    } else {
+                        System.out.println("Invalid command format.Please use 0x7:");
+                    }
+                }
+
                 // If the screen is not set up, prevent other commands
                 else {
                     System.out.println("Error: Screen is not set up. Please send the screen setup command first.");
@@ -138,13 +150,27 @@ public class CommandClient {
     // Convert the command string to the correct byte format
     private static byte[] convertToBytes(String command) {
         try {
+            // Split the command into command type and parameters
             String[] parts = command.split(":");
             String commandHex = parts[0];
-            String[] params = parts[1].split(",");
+            // Handle the case where there might be no parameters for certain commands like 0x7
+            String[] params = parts.length > 1 ? parts[1].split(",") : new String[0]; 
 
+            // Convert the command type from hex to integer
             int commandType = Integer.parseInt(commandHex.substring(2), 16);
 
-            // Check for the drawLine command (0x3) and ensure it has exactly 5 parameters
+            // Handle ClearScreenCommand (0x7) - No parameters expected
+            if (commandType == 7) {
+                // If there are parameters, it's an invalid command
+                if (params.length != 0) {
+                    System.out.println("Error: ClearScreen command does not take any parameters.");
+                    return new byte[0];
+                }
+                // Return command with no parameters
+                return buildCommandBytes(commandType, new ArrayList<>());
+            }
+
+            // Handle DrawLineCommand (0x3) - Ensure it has exactly 5 parameters
             if (commandType == 3 && params.length != 5) {
                 System.out.println("Error: DrawLine command must have exactly 5 parameters (x1, y1, x2, y2, colorIndex).");
                 return new byte[0];

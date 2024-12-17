@@ -19,4 +19,7 @@ public interface CommandValidator {
 
     // Method to drawAtCursor
     boolean isValidDrawAtCursorCommand(String command);
+
+    // Method to clear screen
+    boolean isValidClearScreenCommand(String command);
 }
