@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="934d59e5-8db1-4e0d-86aa-fd23cd53fd94" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CommandClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/CommandClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/CommandClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/commands/EndOfFileCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands/EndOfFileCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ScreenServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ScreenServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/validators/CommandValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/validators/CommandValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parser/CommandParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/parser/CommandParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/validators/CommandValidatorImp.class" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidatorImp.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/validators/CommandValidatorImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/validators/CommandValidatorImp.java" afterDir="false" />
     </list>
@@ -127,7 +122,9 @@
       <workItem from="1734251209420" duration="2838000" />
       <workItem from="1734270082776" duration="11955000" />
       <workItem from="1734331441998" duration="10630000" />
-      <workItem from="1734418560564" duration="13871000" />
+      <workItem from="1734418560564" duration="13978000" />
+      <workItem from="1734774815578" duration="2587000" />
+      <workItem from="1735292009329" duration="1117000" />
     </task>
     <servers />
   </component>

@@ -21,7 +21,7 @@ public class CommandValidatorImp implements CommandValidator {
     @Override
     public boolean isValidDrawLineCommand(String command) {
         // Validate drawLine command format (e.g., '0x3:x1,y1,x2,y2,colorIndex,character')
-        String regex = "^0x3:[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+,[-.\\/|\\\\]$";
+        String regex = "^0x3:[0-9]+,[0-9]+,[0-9]+,[0-9]+,[0-9]+";
         return command.matches(regex);
     }
 
@@ -57,6 +57,4 @@ public class CommandValidatorImp implements CommandValidator {
         String regex = "^0xFF$";
         return command.matches(regex);
     }
-
-
 }
