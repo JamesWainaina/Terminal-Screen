@@ -87,7 +87,7 @@ Follow these steps to clone, build, and run the application.
 Start by cloning the repository to your local machine:
 
 ```bash
-git clone <https://github.com/JamesWainaina/Terminal-Screen.git>
+git clone https://github.com/JamesWainaina/Terminal-Screen.git
 ```
 
 ### Step 2: Change directory to src folder
